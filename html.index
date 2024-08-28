@@ -23,7 +23,7 @@
                 <p>Opponent's Score: <span id="opponent-score">0</span></p>
             </div>
             <div id="click-area">
-                <img src="image.png" id="click-image" alt="Click Me!">
+                <img src="https://files.catbox.moe/bhb63k.jpg" id="click-image" alt="Click Me!">
             </div>
         </div>
     </div>
