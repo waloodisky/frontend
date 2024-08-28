@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer Clicker Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        button {
+            padding: 15px 25px;
+            font-size: 24px;
+            margin: 20px;
+        }
+        .scores {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Multiplayer Clicker Game</h1>
+        <p>Click the button as many times as you can!</p>
+        <button id="click-btn">Click!</button>
+        <div class="scores">
+            <p>Player 1: <span id="player1-score">0</span></p>
+            <p>Player 2: <span id="player2-score">0</span></p>
+        </div>
+        <p id="status"></p>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        let roomId;
+
+        socket.emit('joinGame');
+
+        socket.on('startGame', (room) => {
+            roomId = room;
+            document.getElementById('status').textContent = 'Game started!';
+        });
+
+        document.getElementById('click-btn').addEventListener('click', () => {
+            socket.emit('click');
+        });
+
+        socket.on('updateScores', (data) => {
+            document.getElementById('player1-score').textContent = data.player1Score;
+            document.getElementById('player2-score').textContent = data.player2Score;
+        });
+
+        socket.on('endGame', () => {
+            document.getElementById('status').textContent = 'The other player disconnected. Game over.';
+        });
+    </script>
+</body>
+</html>
