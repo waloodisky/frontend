@@ -3,29 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2-Player Clicker Game</title>
+    <title>Clicker Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="game-container">
-        <div id="menu">
-            <button id="create-room">Create Room</button>
-            <input type="text" id="room-id" placeholder="Enter Room ID">
-            <button id="join-room">Join Room</button>
-        </div>
-        <div id="waiting-room" style="display:none;">
-            <p>Room ID: <span id="room-id-display"></span></p>
-            <p>Waiting for the second player to join...</p>
-        </div>
-        <div id="game" style="display:none;">
-            <div id="scoreboard">
-                <p>Your Score: <span id="your-score">0</span></p>
-                <p>Opponent's Score: <span id="opponent-score">0</span></p>
-            </div>
-            <div id="click-area">
-                <img src="https://files.catbox.moe/bhb63k.jpg" id="click-image" alt="Click Me!">
-            </div>
-        </div>
+    <div id="menu">
+        <button id="create-room">Create Room</button>
+        <input type="text" id="room-id" placeholder="Enter Room ID">
+        <button id="join-room">Join Room</button>
+    </div>
+    <div id="waiting-room" style="display: none;">
+        <p>Waiting for another player...</p>
+        <span id="room-id-display"></span>
+    </div>
+    <div id="game" style="display: none;">
+        <img id="click-image" src="https://files.catbox.moe/bhb63k.jpg" alt="Click Me" width="200" height="200">
+        <p>Your Score: <span id="your-score">0</span></p>
+        <p>Opponent Score: <span id="opponent-score">0</span></p>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="app.js"></script>
