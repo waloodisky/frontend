@@ -5,19 +5,45 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="menu">
-        <button id="matchmake">Find Opponent</button>
-    </div>
-    <div id="waiting-room" style="display: none;">
-        <p>Waiting for opponent...</p>
-        <p>Room ID: <span id="room-id-display"></span></p>
-    </div>
-    <div id="game" style="display: none;">
+    <div id="game">
         <img id="click-image" src="https://files.catbox.moe/bhb63k.jpg" alt="Click Me">
         <div>Your Score: <span id="your-score">0</span></div>
         <div>Opponent's Score: <span id="opponent-score">0</span></div>
     </div>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="script.js"></script>
+
+    <script>
+        // Use your remote WebSocket server URL
+        const ws = new WebSocket('wss://makimaserver.glitch.me');
+
+        ws.onopen = function() {
+            console.log('WebSocket connection opened');
+        };
+
+        ws.onmessage = function(event) {
+            console.log('Received WebSocket message:', event.data);
+            // Update your UI or handle messages here
+        };
+
+        ws.onclose = function() {
+            console.log('WebSocket connection closed');
+        };
+
+        document.getElementById('click-image').addEventListener('click', () => {
+            // Send HTTP POST request
+            fetch('https://makimaserver.glitch.me/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: 'Player clicked!' })
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Message sent');
+                } else {
+                    console.error('Failed to send message');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
