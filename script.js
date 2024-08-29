@@ -1,11 +1,10 @@
-const socket = io('https://makimaserver.glitch.me:3000');
+const socket = io("makimaserver.glitch.me");
 
-// Handle Create Room button click
+// Create or join a room
 document.getElementById('create-room').addEventListener('click', () => {
     socket.emit('createRoom');
 });
 
-// Handle Join Room button click
 document.getElementById('join-room').addEventListener('click', () => {
     const roomId = document.getElementById('room-id').value;
     socket.emit('joinRoom', roomId);
@@ -24,20 +23,23 @@ socket.on('roomCreated', (roomId) => {
     document.getElementById('room-id-display').textContent = roomId;
 });
 
-// Listen for gameStart event
-socket.on('gameStart', () => {
+// Listen for gameStarted event
+socket.on('gameStarted', (data) => {
     document.getElementById('waiting-room').style.display = 'none';
     document.getElementById('game').style.display = 'block';
+    // Initialize scores and timer
+    setInterval(() => {
+        fetch(`/gameData/${roomId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('your-score').textContent = data.player1;
+                document.getElementById('opponent-score').textContent = data.player2;
+            });
+    }, 1000);
 });
 
 // Update scores
-socket.on('updateScores', (yourScore, opponentScore) => {
-    document.getElementById('your-score').textContent = yourScore;
-    document.getElementById('opponent-score').textContent = opponentScore;
-});
-
-// Handle player disconnection
-socket.on('playerDisconnected', () => {
-    alert('The other player has disconnected. The game will reset.');
-    location.reload();
+socket.on('scoreUpdate', (data) => {
+    document.getElementById('your-score').textContent = data.player1;
+    document.getElementById('opponent-score').textContent = data.player2;
 });
