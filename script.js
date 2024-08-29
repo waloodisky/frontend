@@ -1,13 +1,8 @@
-const socket = io("makimaserver.glitch.me");
+const socket = io('makimaserver.glitch.me');
 
-// Create or join a room
-document.getElementById('create-room').addEventListener('click', () => {
-    socket.emit('createRoom');
-});
-
-document.getElementById('join-room').addEventListener('click', () => {
-    const roomId = document.getElementById('room-id').value;
-    socket.emit('joinRoom', roomId);
+// Handle matchmaking button click
+document.getElementById('matchmake').addEventListener('click', () => {
+    socket.emit('matchmake');
 });
 
 // Handle image click
