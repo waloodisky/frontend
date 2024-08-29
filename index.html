@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clicker Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -13,15 +11,15 @@
         <button id="join-room">Join Room</button>
     </div>
     <div id="waiting-room" style="display: none;">
-        <p>Waiting for another player...</p>
-        <span id="room-id-display"></span>
+        <p>Waiting for opponent...</p>
+        <p>Room ID: <span id="room-id-display"></span></p>
     </div>
     <div id="game" style="display: none;">
-        <img id="click-image" src="https://files.catbox.moe/bhb63k.jpg" alt="Click Me" width="200" height="200">
-        <p>Your Score: <span id="your-score">0</span></p>
-        <p>Opponent Score: <span id="opponent-score">0</span></p>
+        <img id="click-image" src="https://files.catbox.moe/bhb63k.jpg" alt="Click Me">
+        <div>Your Score: <span id="your-score">0</span></div>
+        <div>Opponent's Score: <span id="opponent-score">0</span></div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
