@@ -1,14 +1,16 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    padding: 20px;
+    margin: 0;
+    padding: 0;
 }
 
 #menu, #waiting-room, #game {
-    margin-top: 20px;
+    margin: 20px;
 }
 
 #click-image {
+    width: 200px;
     cursor: pointer;
 }
 
