@@ -1,4 +1,4 @@
-const socket = io('makimaserver.glitch.me');
+const socket = io('makimaserver.glitch.me:3000');
 
 // Handle Create Room button click
 document.getElementById('create-room').addEventListener('click', () => {
